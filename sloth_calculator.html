@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sloth Calculator</title>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 15pt;
+        }
+        
+        #calculator {
+            display: grid;
+            width: 200px;
+            height: 300px;
+            grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+            background-color: rgb(55, 198, 255);
+            padding: 20px 10px 20px 10px;
+            border-radius: 5px;
+            border: solid black;
+        }
+
+        #equal {
+            grid-row: span 2;
+        }
+
+        #zero {
+            grid-column: span 2;
+        }
+
+        button {
+            border-radius: 5px;
+            border: solid black;
+            background-color: rgb(77, 193, 255);
+            margin: 2px;
+        }
+
+        button:hover {
+            background-color: rgb(60, 169, 227);
+            transition: 0.1s;
+        }
+
+        p {
+            padding: 2px;
+            min-height: 50px;
+            overflow-x: scroll;
+            grid-column: span 4;
+            margin: 4px;
+            border: solid black;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        #button {
+            margin: 10px 0 10px 0;
+            background-color: rgb(73, 73, 255);
+            color: white;
+            transition: 0.1s;
+        }
+
+        #button:hover {
+            background-color: rgb(90, 90, 255);
+        }
+    </style>
+</head>
+<body>
+    <button onclick="changeBool()" id="button">Click me to reverse the output of the calculator.</button>
+    <div id="calculator">
+        <p id="screen"></p>
+        <button onclick="power()">⏻</button>
+        <button class="special" onclick="goPremiuuum()">÷</button>
+        <button class="special" onclick="goPremiuuum()">×</button>
+        <button class="special" onclick="goPremiuuum()">-</button>
+        <button id="7" onclick="print(seven); printReverse(7)">7</button>
+        <button id="8" onclick="print(eight); printReverse(8)">8</button>
+        <button id="9" onclick="print(nine); printReverse(9)">9</button>
+        <button class="special" onclick="goPremiuuum()">+</button>
+        <button id="4" onclick="print(four); printReverse(4)">4</button>
+        <button id="5" onclick="print(five); printReverse(5)">5</button>
+        <button id="6" onclick="print(six); printReverse(6);">6</button>
+        <button onclick="deletLast()">⟵</button>
+        <button id="1" onclick="print(one); printReverse(1)">1</button>
+        <button id="2" onclick="print(two); printReverse(2)">2</button>
+        <button id="3" onclick="print(three); printReverse(3)">3</button>
+        <button class="special" onclick="goPremiuuum()" id="equal">=</button>
+        <button id="zero" onclick="print(zero); printReverse(0)">0</button>
+        <button onclick="dot()">.</button>
+    </div>
+
+    <script>
+        let text = new Array();
+        let reverseTextBool = false;
+        let transformText = new Array();
+        let reverseText = new Array();
+        let screen = document.getElementById("screen");
+        let zero = document.getElementById("zero");
+        let one = document.getElementById("1");
+        let two = document.getElementById("2");
+        let three = document.getElementById("3");
+        let four = document.getElementById("4");
+        let five = document.getElementById("5");
+        let six = document.getElementById("6");
+        let seven = document.getElementById("7");
+        let eight = document.getElementById("8");
+        let nine = document.getElementById("9");
+        zero.value = 0;
+        one.value = 1;
+        two.value = 2;
+        three.value = 3;
+        four.value = 4;
+        five.value = 5;
+        six.value = 6;
+        seven.value = 7;
+        eight.value = 8;
+        nine.value = 9;
+
+        function changeBool() {
+            if (reverseTextBool === false) {
+                reverseTextBool = true;
+            } else {
+                reverseTextBool = false;
+            }
+        }
+
+        function goPremiuuum() {
+            alert("Become a premium member if you want to use +, -, ×, ÷ or = signs");
+        }
+
+        function dot() {
+            alert("Message to myself : fix the bug that makes dots not work.");
+        }
+
+        function power() {
+            alert("Message to myself : fix the bug that makes the power button not work.")
+        }
+
+        function print(number) {
+            text.push(number.value);
+        }
+
+        function deletLast() {
+            let last = text.pop();
+            let lastReverse = reverseText.pop();
+        }
+
+        function write() {
+            if (reverseTextBool === false) {
+                screen.innerHTML = text.join("");
+            } else {
+                screen.innerHTML = reverseText.join("");
+            }
+
+            requestAnimationFrame(write);
+        }
+
+        requestAnimationFrame(write);
+
+        function printReverse(number) {
+            if (number === 0) {
+                transformText.push("O");
+            } else if (number === 1) {
+                transformText.push("I");
+            } else if (number === 2) {
+                transformText.push("Z");
+            } else if (number === 3) {
+                transformText.push("E");
+            } else if (number === 4) {
+                transformText.push("H");
+            } else if (number === 5) {
+                transformText.push("S");
+            } else if (number === 6) {
+                transformText.push("G");
+            } else if (number === 7) {
+                transformText.push("L");
+            } else if (number === 8) {
+                transformText.push("B");
+            } else if (number === 9) {
+                transformText.push("-");
+            }
+            reverseText = transformText.reverse();
+        }
+    </script>
+</body>
+</html>
