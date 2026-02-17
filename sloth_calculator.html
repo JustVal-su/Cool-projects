@@ -72,19 +72,19 @@
         <button class="special" onclick="goPremiuuum()">÷</button>
         <button class="special" onclick="goPremiuuum()">×</button>
         <button class="special" onclick="goPremiuuum()">-</button>
-        <button id="7" onclick="print(seven); printReverse(7)">7</button>
-        <button id="8" onclick="print(eight); printReverse(8)">8</button>
-        <button id="9" onclick="print(nine); printReverse(9)">9</button>
+        <button id="7" onclick="print(7)">7</button>
+        <button id="8" onclick="print(8)">8</button>
+        <button id="9" onclick="print(9)">9</button>
         <button class="special" onclick="goPremiuuum()">+</button>
-        <button id="4" onclick="print(four); printReverse(4)">4</button>
-        <button id="5" onclick="print(five); printReverse(5)">5</button>
-        <button id="6" onclick="print(six); printReverse(6);">6</button>
-        <button onclick="deletLast()">⟵</button>
-        <button id="1" onclick="print(one); printReverse(1)">1</button>
-        <button id="2" onclick="print(two); printReverse(2)">2</button>
-        <button id="3" onclick="print(three); printReverse(3)">3</button>
+        <button id="4" onclick="print(4)">4</button>
+        <button id="5" onclick="print(5)">5</button>
+        <button id="6" onclick="print(6);">6</button>
+        <button onclick="deleteLast()">⟵</button>
+        <button id="1" onclick="print(1)">1</button>
+        <button id="2" onclick="print(2)">2</button>
+        <button id="3" onclick="print(3)">3</button>
         <button class="special" onclick="goPremiuuum()" id="equal">=</button>
-        <button id="zero" onclick="print(zero); printReverse(0)">0</button>
+        <button id="zero" onclick="print(0)">0</button>
         <button onclick="dot()">.</button>
     </div>
 
@@ -104,23 +104,10 @@
         let seven = document.getElementById("7");
         let eight = document.getElementById("8");
         let nine = document.getElementById("9");
-        zero.value = 0;
-        one.value = 1;
-        two.value = 2;
-        three.value = 3;
-        four.value = 4;
-        five.value = 5;
-        six.value = 6;
-        seven.value = 7;
-        eight.value = 8;
-        nine.value = 9;
 
         function changeBool() {
-            if (reverseTextBool === false) {
-                reverseTextBool = true;
-            } else {
-                reverseTextBool = false;
-            }
+            reverseTextBool = !reverseTextBool;
+            write();
         }
 
         function goPremiuuum() {
@@ -132,31 +119,27 @@
         }
 
         function power() {
-            alert("Message to myself : fix the bug that makes the power button not work.")
+            alert("Message to myself : fix the bug that makes the power button not work.");
         }
 
-        function print(number) {
-            text.push(number.value);
-        }
-
-        function deletLast() {
+        function deleteLast() {
             let last = text.pop();
-            let lastReverse = reverseText.pop();
+            let lastReverse = transformText.pop();
+            write();
         }
 
         function write() {
             if (reverseTextBool === false) {
                 screen.innerHTML = text.join("");
             } else {
-                screen.innerHTML = reverseText.join("");
+                let reversedText = transformText.reverse();
+                screen.innerHTML = reversedText.join("");
             }
-
-            requestAnimationFrame(write);
         }
 
-        requestAnimationFrame(write);
-
-        function printReverse(number) {
+        function print(number) {
+            text.push(number);
+            
             if (number === 0) {
                 transformText.push("O");
             } else if (number === 1) {
@@ -178,7 +161,8 @@
             } else if (number === 9) {
                 transformText.push("-");
             }
-            reverseText = transformText.reverse();
+
+            write();
         }
     </script>
 </body>
