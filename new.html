@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test</h1>
+  </body>
+  <script>
+    let hex = "";
+    let secondary = "";
+    for (let i = 0; i < 3; i++) {
+      let val = Math.floor(Math.random() * 255);
+      let val2 = 255 - val;
+      if (val < 10) {
+        val = "0" + val.toString();
+        hex += val;
+      } else {
+        hex += val.toString(16);
+      }
+      if (val2 < 10) {
+        val2 = "0" + val2.toString();
+        secondary += val2;
+      } else {
+        secondary += val2.toString(16);
+      }
+    }
+    console.log(`#${hex}`);
+    console.log(`#${secondary}`);
+    document.querySelector("body").style.backgroundColor = `#${hex}`;
+    document.querySelector("h1").style.color = `#${secondary}`;
+  </script>
+</html>
